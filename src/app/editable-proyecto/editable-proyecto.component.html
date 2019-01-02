@@ -1,0 +1,5 @@
+<td *ngIf="!editable">{{proyecto.titulo}}</td>
+<td *ngIf="!editable">{{proyecto.presupuesto}}</td>
+<td *ngIf="editable"><input class="form-control" [(ngModel)]="proyecto.titulo"/></td>
+<td *ngIf="editable"><input class="form-control" [(ngModel)]="proyecto.presupuesto"/></td>
+<td><button class="btn" (click)="onEdit()">{{editable ? 'Save': 'Edit'}}</button></td>
