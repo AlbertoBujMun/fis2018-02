@@ -1,0 +1,5 @@
+<td *ngIf="! editing">{{proyect.id}}</td>
+<td *ngIf="! editing">{{proyect.titulo}}</td>
+<td *ngIf="editing"><input class="form-control" [(ngModel)] = "proyect.id"/></td>
+<td *ngIf="editing"><input class="form-control" [(ngModel)] = "proyect.titulo"/></td>
+<td><button class="btn" (click)="onEdit()">{{editing ? 'Save' : 'Edit'}}</button></td>

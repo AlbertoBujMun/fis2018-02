@@ -1,6 +1,7 @@
 var express = require("express");
  var bodyParser = require("body-parser");
  var DataStore = require("nedb");
+ var cors = require('cors')
 
  var PORT = 3000;
  var BASE_API_PATH = "/api/v1";
@@ -10,10 +11,16 @@ var express = require("express");
 
  var app = express();
  app.use(bodyParser.json());
+ app.use(cors());
 
  var initialProyects = [
-     { "id": "1", "titulo": "test1" },
-     { "id": "2", "titulo": "test2" },
+    { "id": "1", "titulo": "Test", "descripcion": "Descripcion",  "fechaInicio" : "2019-01-04", "fechaFin" : "2019-01-04", "organismo":"organismo", "investigadorResponsable" : "1", "investigadores" : ["1", "3"], "presupuesto" :"2", "estado":"concedido"},
+    { "id": "2", "titulo": "Test", "descripcion": "Descripcion",  "fechaInicio" : "2019-01-04", "fechaFin" : "2019-01-04", "organismo":"organismo", "investigadorResponsable" : "1", "investigadores" : ["1", "3"], "presupuesto" :"2", "estado":"concedido"},
+    { "id": "3", "titulo": "Test", "descripcion": "Descripcion",  "fechaInicio" : "2019-01-04", "fechaFin" : "2019-01-04", "organismo":"organismo", "investigadorResponsable" : "1", "investigadores" : ["1", "3"], "presupuesto" :"2", "estado":"concedido"},
+    { "id": "4", "titulo": "Test", "descripcion": "Descripcion",  "fechaInicio" : "2019-01-04", "fechaFin" : "2019-01-04", "organismo":"organismo", "investigadorResponsable" : "1", "investigadores" : ["1", "3"], "presupuesto" :"2", "estado":"concedido"},
+    { "id": "5", "titulo": "Test", "descripcion": "Descripcion",  "fechaInicio" : "2019-01-04", "fechaFin" : "2019-01-04", "organismo":"organismo", "investigadorResponsable" : "1", "investigadores" : ["1", "3"], "presupuesto" :"2", "estado":"concedido"},
+    { "id": "6", "titulo": "Test", "descripcion": "Descripcion",  "fechaInicio" : "2019-01-04", "fechaFin" : "2019-01-04", "organismo":"organismo", "investigadorResponsable" : "1", "investigadores" : ["1", "3"], "presupuesto" :"2", "estado":"concedido"}
+    
  ];
 
  var db = new DataStore({

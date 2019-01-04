@@ -1,5 +1,5 @@
 <div *ngIf="selectedProyect">
-  {{selectedProyect.name}}
+  {{selectedProyect.titulo}}
 </div>
 
 <table class="table">
@@ -12,14 +12,11 @@
 </thead>  
 
 <tr>
-    <td><input class="form-control" [(ngModel)]="newProyect.name"></td>
-    <td><input class="form-control" [(ngModel)]="newProyect.phone"></td>
+    <td><input class="form-control" [(ngModel)]="newProyect.id"></td>
+    <td><input class="form-control" [(ngModel)]="newProyect.titulo"></td>
     <td><button class="btn btn-primary" (click)="addProyect()">Add Project</button> </td>
 </tr>     
+<tr *ngFor="let proyect of proyects" app-editable-proyect [proyect]="proyect">
+</tr>
 
-<tr *ngFor="let contact of contacts">
-  <td>{{proyect.id}}</td>
-  <td>{{proyect.titulo}}</td>
-  <td><button class="btn" (click)="onEdit(proyect)">Edit</button></td>
-</tr>    
 </table>
