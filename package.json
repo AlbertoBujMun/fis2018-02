@@ -1,0 +1,25 @@
+{
+  "name": "proyectos",
+  "version": "1.0.0",
+  "description": "Servicio de proyectos para FIS2018/19",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlbertoBujMun/fis2018.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlbertoBujMun/fis2018/issues"
+  },
+  "homepage": "https://github.com/AlbertoBujMun/fis2018#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "nedb": "^1.8.0"
+  }
+}
