@@ -1,0 +1,25 @@
+<div *ngIf="selectedProyect">
+  {{selectedProyect.name}}
+</div>
+
+<table class="table">
+<thead>
+    <tr>
+        <th>Id</th>
+        <th>Titulo</th>
+        <th>&nbsp;</th>
+    </tr>
+</thead>  
+
+<tr>
+    <td><input class="form-control" [(ngModel)]="newProyect.name"></td>
+    <td><input class="form-control" [(ngModel)]="newProyect.phone"></td>
+    <td><button class="btn btn-primary" (click)="addProyect()">Add Project</button> </td>
+</tr>     
+
+<tr *ngFor="let contact of contacts">
+  <td>{{proyect.id}}</td>
+  <td>{{proyect.titulo}}</td>
+  <td><button class="btn" (click)="onEdit(proyect)">Edit</button></td>
+</tr>    
+</table>
