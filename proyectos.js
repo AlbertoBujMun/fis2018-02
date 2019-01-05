@@ -1,15 +1,15 @@
 var mongoose = require("mongoose");
 
 var proyectoSchema = new mongoose.Schema({
-  titulo: String,
-  descripcion: String,
+  titulo: string,
+  descripcion: string,
   fechaInicio: Date,
   fechaFin: Date,
-  organismo: String,
-  investigadorResponsable: String,
-  investigadores: [String],
-  presupuesto: Number,
-  estado: String
+  organismo: string,
+  investigadorResponsable: string,
+  investigadores: [string],
+  presupuesto: number,
+  estado: string
 });
 
 proyectoSchema.methods.cleanup = function() {
