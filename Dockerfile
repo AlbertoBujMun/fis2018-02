@@ -1,4 +1,4 @@
-FROM node:10.14-stretch-slim
+FROM node:9-alpine
 
 WORKDIR /app
 
@@ -8,9 +8,7 @@ COPY package-lock.json .
 RUN npm install
 
 COPY index.js .
-COPY proyectos.js .
-COPY apikeys.js .
-COPY server.js .
+COPY proyects.json .
 COPY dist dist
 
 #RUN ng build --prod

@@ -3,6 +3,9 @@ var express = require("express");
  var DataStore = require("nedb");
  var cors = require('cors')
 
+var path = require('path') 
+const PROYECTS_APP_DIR = "/dist/proyects-app";
+
  var PORT = 3000;
  var BASE_API_PATH = "/api/v1";
  var dbFileName = __dirname + "/proyects.json";
@@ -12,6 +15,11 @@ var express = require("express");
  var app = express();
  app.use(bodyParser.json());
  app.use(cors());
+
+app.use(express.static(path.join(__dirname, PROYECTS_APP_DIR))); 
+app.get('/', function(req, res) { 
+    res.sendFile(path.join(__dirname, PROYECTS_APP_DIR, '/index.html')); 
+}); 
 
  var initialProyects = [
     { "id": "1", "titulo": "Test", "descripcion": "Descripcion",  "fechaInicio" : "2019-01-04", "fechaFin" : "2019-01-04", "organismo":"organismo", "investigadorResponsable" : "1", "investigadores" : ["1", "3"], "presupuesto" :"2", "estado":"concedido"},
@@ -43,9 +51,6 @@ var express = require("express");
      }
  });
 
- app.get("/", (req, res) => {
-     res.send("<html><body><h1>My server</h1></body></html>");
- });
 
  app.get(BASE_API_PATH + "/proyects", (req, res) => {
      // Obtain all proyects

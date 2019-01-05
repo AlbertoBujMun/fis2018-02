@@ -4,7 +4,6 @@ node_js:
   - "9"
 services:
   - docker
-  - mongodb
 
 before_install:
   - wget -qO- https://toolbelt.heroku.com/install.sh | sh
@@ -15,9 +14,8 @@ install:
 
 script:
   - ng build --prod --aot
-  - npm test
   # build docker images
-  - docker build -t proyectos .
+  - docker build -t proyects .
 
 deploy:
   provider: script
