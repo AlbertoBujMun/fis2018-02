@@ -17,7 +17,7 @@ script:
   - ng build --prod --aot
   - npm test
   # build docker images
-  - docker build -t contacts .
+  - docker build -t proyectos .
 
 deploy:
   provider: script
