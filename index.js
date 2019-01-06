@@ -6,7 +6,7 @@ var express = require("express");
 var path = require('path') 
 const PROYECTS_APP_DIR = "/dist/proyects-app";
 
- var PORT = 3000;
+var PORT = (process.env.PORT || 3000);
  var BASE_API_PATH = "/api/v1";
  var dbFileName = __dirname + "/proyects.json";
 
