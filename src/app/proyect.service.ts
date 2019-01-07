@@ -3,14 +3,14 @@ import { Proyect } from './proyect';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProyectService {
 
-  private proyectsUrl = 'http://localhost:3000/api/v1';
+  private proyectsUrl = window.location.origin+'/api/v1';
+  private apikey = '11165da8-c45d-4cb3-95c4-6fa13939f7a5';
 
   constructor(
     private http: HttpClient
@@ -42,7 +42,7 @@ private handleError<T> (operation = 'operation', result?: T) {
 }
 
   getProyects(): Observable<Proyect[]> {
-    const url = `${this.proyectsUrl}/proyects`;
+    const url = `${this.proyectsUrl}/proyects?apikey=${this.apikey}`;
     return this.http.get<Proyect[]>(url)
       .pipe(
           tap(() => this.log('fetched proyects')),
@@ -52,7 +52,7 @@ private handleError<T> (operation = 'operation', result?: T) {
 
   addProyect(proyect: Proyect): Observable<any> {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const url = `${this.proyectsUrl}/proyects`;
+    const url = `${this.proyectsUrl}/proyects?apikey=${this.apikey}`;
     return this.http.post(url, proyect, {responseType: 'text', headers: headers})
       .pipe(
           tap(() => this.log(`add proyect id =${proyect.id}`)),
@@ -63,7 +63,7 @@ private handleError<T> (operation = 'operation', result?: T) {
   updateProyect(proyect: Proyect): Observable<any> {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     
-    const url = `${this.proyectsUrl}/proyects/${proyect.id}`;
+    const url = `${this.proyectsUrl}/proyects/${proyect.id}?apikey=${this.apikey}`;
     return this.http.put(url, proyect, {responseType: 'text', headers: headers})
         .pipe(
           tap(() => this.log(`updated proyect id=${proyect.id}`)),
