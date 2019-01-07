@@ -4,93 +4,31 @@ var DataStore = require('nedb');
 var cors = require('cors');
 var path = require('path');
 var Proyect = require('./proyects');
+var ApiKey = require('./apikeys');
+
+var passport = require('passport');
+var LocalAPIKey = require('passport-localapikey-update').Strategy;
 
 const PROYECTS_APP_DIR = "/dist/proyects-app"; 
 var BASE_API_PATH = "/api/v1";
-var filename = __dirname + "/proyects.json";
 
-var proyects = [
-  {
-    id: "1",
-    titulo: "Test",
-    descripcion: "Descripcion",
-    fechaInicio: "2019-01-04",
-    fechaFin: "2019-01-04",
-    organismo: "organismo",
-    investigadorResponsable: "1",
-    investigadores: ["1", "3"],
-    presupuesto: "2",
-    estado: "concedido"
-  },
-  {
-    id: "2",
-    titulo: "Test",
-    descripcion: "Descripcion",
-    fechaInicio: "2019-01-04",
-    fechaFin: "2019-01-04",
-    organismo: "organismo",
-    investigadorResponsable: "1",
-    investigadores: ["1", "3"],
-    presupuesto: "2",
-    estado: "concedido"
-  },
-  {
-    id: "3",
-    titulo: "Test",
-    descripcion: "Descripcion",
-    fechaInicio: "2019-01-04",
-    fechaFin: "2019-01-04",
-    organismo: "organismo",
-    investigadorResponsable: "1",
-    investigadores: ["1", "3"],
-    presupuesto: "2",
-    estado: "concedido"
-  },
-  {
-    id: "4",
-    titulo: "Test",
-    descripcion: "Descripcion",
-    fechaInicio: "2019-01-04",
-    fechaFin: "2019-01-04",
-    organismo: "organismo",
-    investigadorResponsable: "1",
-    investigadores: ["1", "3"],
-    presupuesto: "2",
-    estado: "concedido"
-  },
-  {
-    id: "5",
-    titulo: "Test",
-    descripcion: "Descripcion",
-    fechaInicio: "2019-01-04",
-    fechaFin: "2019-01-04",
-    organismo: "organismo",
-    investigadorResponsable: "1",
-    investigadores: ["1", "3"],
-    presupuesto: "2",
-    estado: "concedido"
-  },
-  {
-    id: "6",
-    titulo: "Test",
-    descripcion: "Descripcion",
-    fechaInicio: "2019-01-04",
-    fechaFin: "2019-01-04",
-    organismo: "organismo",
-    investigadorResponsable: "1",
-    investigadores: ["1", "3"],
-    presupuesto: "2",
-    estado: "concedido"
-  }
-];
-
-var db = new DataStore({
-    filename: filename,
-    autoload: true
-});
+passport.use(new LocalAPIKey(
+    (apikey, done) => {
+        ApiKey.findOne({apikey: apikey}, (err, user) => {
+            if (err) { return done(err); }
+            if (!user) {
+                return done(null, false, { message: 'Unknown apikey ' +apikey });
+            } else {
+                console.log("Logged as: " + user.user);
+                return done(null, user);
+            }
+        });
+    }
+));
 
 var app = express();
 app.use(bodyParser.json());
+app.use(passport.initialize());
 app.use(cors());
 app.use(express.static(path.join(__dirname, PROYECTS_APP_DIR))); 
 app.get('/', function(req, res) { 
@@ -98,21 +36,25 @@ app.get('/', function(req, res) {
 }); 
 
 
-app.get(BASE_API_PATH + "/proyects", (req, res) => {
-  Proyect.find((err, proyects) => {
-        if (err) {
-            console.error("Error accessing database");
-            res.sendStatus(500);
-        } else {
-            res.send(proyects.map((proyect) => {
-                return proyect.cleanup();
-            }));
-        }
-    });
+app.get(BASE_API_PATH + "/proyects", 
+        passport.authenticate('localapikey', {session:false}), 
+        (req, res) => {
+            Proyect.find((err, proyects) => {
+                if (err) {
+                    console.error("Error accessing database");
+                    res.sendStatus(500);
+                } else {
+                    res.send(proyects.map((proyect) => {
+                        return proyect.cleanup();
+                    }));
+                }
+            });
 });
 
 
-app.post(BASE_API_PATH + "/proyects", (req, res) => {
+app.post(BASE_API_PATH + "/proyects", 
+    passport.authenticate('localapikey', {session:false}), 
+    (req, res) => {
     // Create a new proyect
     console.log(Date()+" - POST /proyects");
     var proyect = req.body;
@@ -126,7 +68,9 @@ app.post(BASE_API_PATH + "/proyects", (req, res) => {
     });
 });
 
-app.put(BASE_API_PATH + "/proyects", (req, res) => {
+app.put(BASE_API_PATH + "/proyects", 
+    passport.authenticate('localapikey', {session:false}), 
+    (req, res) => {
     console.log(Date()+" - PUT /proyects");
     var proyects = req.body;
     Proyect.update(proyect, (err) => {
@@ -139,7 +83,9 @@ app.put(BASE_API_PATH + "/proyects", (req, res) => {
   });
 });
 
-app.delete(BASE_API_PATH + "/proyects", (req, res) => {
+app.delete(BASE_API_PATH + "/proyects", 
+    passport.authenticate('localapikey', {session:false}), 
+    (req, res) => {
     // Remove all proyects
     console.log(Date()+" - DELETE /proyects");
     Proyect.remove(proyect, (err) => {
@@ -153,7 +99,9 @@ app.delete(BASE_API_PATH + "/proyects", (req, res) => {
 });
 
 
-app.post(BASE_API_PATH + "/proyects/:id", (req, res) => {
+app.post(BASE_API_PATH + "/proyects/:id", 
+    passport.authenticate('localapikey', {session:false}), 
+    (req, res) => {
     // Forbidden
     console.log(Date()+" - POST /proyects");
     res.sendStatus(405);
@@ -161,7 +109,7 @@ app.post(BASE_API_PATH + "/proyects/:id", (req, res) => {
 
 
 
-app.get(BASE_API_PATH + "/proyects/:id", (req, res) => {
+/*app.get(BASE_API_PATH + "/proyects/:id", (req, res) => {
     // Get a single proyect
     var id = req.params.id;
     console.log(Date()+" - GET /proyects/"+id);
@@ -249,7 +197,7 @@ app.put(BASE_API_PATH + "/proyects/:id", (req, res) => {
             }
         }
     });
-});
+});*/
 
 module.exports.app = app;
-module.exports.db = db;
+//module.exports.db = db;
