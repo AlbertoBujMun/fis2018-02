@@ -113,13 +113,25 @@ app.delete(
   }
 );
 
-app.post(
+app.get(
   BASE_API_PATH + "/proyects/:id",
   passport.authenticate("localapikey", { session: false }),
   (req, res) => {
-    // Forbidden
-    console.log(Date() + " - POST /proyects");
-    res.sendStatus(405);
+    var id = req.params.id;
+    console.log(Date() + " - GET /proyects/" + id);
+    // Get a single proyect
+    Proyect.find({ id: id }, (err, proyects) => {
+      if (err) {
+        console.error("Error accessing database");
+        res.sendStatus(500);
+      } else {
+        res.send(
+          proyects.map(proyect => {
+            return proyect.cleanup();
+          })
+        );
+      }
+    });
   }
 );
 
