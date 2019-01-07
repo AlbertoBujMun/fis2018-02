@@ -99,7 +99,7 @@ app.delete(BASE_API_PATH + "/proyects",
 });
 
 
-app.post(BASE_API_PATH + "/proyects/:id", 
+app.get(BASE_API_PATH + "/proyects/:id", 
     passport.authenticate('localapikey', {session:false}), 
     (req, res) => {
         var id = req.params.id;
