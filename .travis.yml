@@ -4,7 +4,7 @@ node_js:
   - "9"
 services:
   - docker
-  -mongodb
+  - mongodb
 
 before_install:
   - wget -qO- https://toolbelt.heroku.com/install.sh | sh
