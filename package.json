@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node index.js",
+    "inspect": "node --nolazy --inspect-brk=5858 index.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
