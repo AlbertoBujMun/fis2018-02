@@ -115,7 +115,7 @@ app.get(BASE_API_PATH + "/proyects", (req, res) => {
 app.post(BASE_API_PATH + "/proyects", (req, res) => {
     // Create a new proyect
     console.log(Date()+" - POST /proyects");
-    var proyects = req.body;
+    var proyect = req.body;
     Proyect.create(proyect, (err) => {
         if (err) {
             console.error(err);
