@@ -1,6 +1,6 @@
 var server = require("./server");
 var mongoose = require("mongoose");
-var PORT = process.env.PORT || 3200;
+var PORT = process.env.PORT || 3000;
 var dbUrl = (process.env.DB || "mongodb://fis2018:asdf1234@ds251284.mlab.com:51284/fis2018-02");
 var ApiKey = require('./apikeys');
 
