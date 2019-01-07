@@ -1,5 +1,21 @@
 <td *ngIf="! editing">{{proyect.id}}</td>
 <td *ngIf="! editing">{{proyect.titulo}}</td>
-<td *ngIf="editing"><input class="form-control" [(ngModel)] = "proyect.id"/></td>
+<td *ngIf="! editing">{{proyect.descripcion}}</td>
+<td *ngIf="! editing">{{proyect.fechaInicio}}</td>
+<td *ngIf="! editing">{{proyect.fechaFin}}</td>
+<td *ngIf="! editing">{{proyect.organismo}}</td>
+<td *ngIf="! editing">{{proyect.investigadorResponsable}}</td>
+<td *ngIf="! editing">{{proyect.investigadores}}</td>
+<td *ngIf="! editing">{{proyect.presupuesto}}</td>
+<td *ngIf="! editing">{{proyect.estado}}</td>
+<td *ngIf="editing">></td>
 <td *ngIf="editing"><input class="form-control" [(ngModel)] = "proyect.titulo"/></td>
+<td *ngIf="editing"><input class="form-control" [(ngModel)] = "proyect.descripcion"/></td>
+<td *ngIf="editing"><input class="form-control" [(ngModel)] = "proyect.fechaInicio"/></td>
+<td *ngIf="editing"><input class="form-control" [(ngModel)] = "proyect.fechaFin"/></td>
+<td *ngIf="editing"><input class="form-control" [(ngModel)] = "proyect.organismo"/></td>
+<td *ngIf="editing"><input class="form-control" [(ngModel)] = "proyect.investigadorResponsable"/></td>
+<td *ngIf="editing"><input class="form-control" [(ngModel)] = "proyect.investigadores"/></td>
+<td *ngIf="editing"><input class="form-control" [(ngModel)] = "proyect.presupuesto"/></td>
+<td *ngIf="editing"><input class="form-control" [(ngModel)] = "proyect.estado"/></td>
 <td><button class="btn" (click)="onEdit()">{{editing ? 'Save' : 'Edit'}}</button></td>

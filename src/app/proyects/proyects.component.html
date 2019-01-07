@@ -7,13 +7,29 @@
     <tr>
         <th>Id</th>
         <th>Titulo</th>
+        <th>Descripcion</th>
+        <th>Fecha Inicio</th>
+        <th>Fecha Fin</th>
+        <th>Organismo</th>
+        <th>Investigador Responsable</th>
+        <th>Investigadores</th>
+        <th>Presupuesto</th>
+        <th>Estado</th>
         <th>&nbsp;</th>
     </tr>
 </thead>  
 
 <tr>
-    <td><input class="form-control" [(ngModel)]="newProyect.id"></td>
+    <td></td>
     <td><input class="form-control" [(ngModel)]="newProyect.titulo"></td>
+    <td><input class="form-control" [(ngModel)]="newProyect.descripcion"></td>
+    <td><input class="form-control" [(ngModel)]="newProyect.fechaInicio"></td>
+    <td><input class="form-control" [(ngModel)]="newProyect.fechaFin"></td>
+    <td><input class="form-control" [(ngModel)]="newProyect.organismo"></td>
+    <td><input class="form-control" [(ngModel)]="newProyect.investigadorResponsable"></td>
+    <td><input class="form-control" [(ngModel)]="newProyect.investigadores"></td>
+    <td><input class="form-control" [(ngModel)]="newProyect.presupuesto"></td>
+    <td><input class="form-control" [(ngModel)]="newProyect.estado"></td>
     <td><button class="btn btn-primary" (click)="addProyect()">Add Project</button> </td>
 </tr>     
 <tr *ngFor="let proyect of proyects" app-editable-proyect [proyect]="proyect">

@@ -1,113 +1,127 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var DataStore = require('nedb');
-var cors = require('cors');
-var path = require('path');
-var Proyect = require('./proyects');
-var ApiKey = require('./apikeys');
+var express = require("express");
+var bodyParser = require("body-parser");
+var DataStore = require("nedb");
+var cors = require("cors");
+var path = require("path");
+var Proyect = require("./proyects");
+var ApiKey = require("./apikeys");
 
-var passport = require('passport');
-var LocalAPIKey = require('passport-localapikey-update').Strategy;
+var passport = require("passport");
+var LocalAPIKey = require("passport-localapikey-update").Strategy;
 
-const PROYECTS_APP_DIR = "/dist/proyects-app"; 
+const PROYECTS_APP_DIR = "/dist/proyects-app";
 var BASE_API_PATH = "/api/v1";
 
-passport.use(new LocalAPIKey(
-    (apikey, done) => {
-        ApiKey.findOne({apikey: apikey}, (err, user) => {
-            if (err) { return done(err); }
-            if (!user) {
-                return done(null, false, { message: 'Unknown apikey ' +apikey });
-            } else {
-                console.log("Logged as: " + user.user);
-                return done(null, user);
-            }
-        });
-    }
-));
+passport.use(
+  new LocalAPIKey((apikey, done) => {
+    ApiKey.findOne({ apikey: apikey }, (err, user) => {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false, { message: "Unknown apikey " + apikey });
+      } else {
+        console.log("Logged as: " + user.user);
+        return done(null, user);
+      }
+    });
+  })
+);
 
 var app = express();
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(cors());
-app.use(express.static(path.join(__dirname, PROYECTS_APP_DIR))); 
-app.get('/', function(req, res) { 
-    res.sendFile(path.join(__dirname, PROYECTS_APP_DIR, '/index.html')); 
-}); 
-
-
-app.get(BASE_API_PATH + "/proyects", 
-        passport.authenticate('localapikey', {session:false}), 
-        (req, res) => {
-            Proyect.find((err, proyects) => {
-                if (err) {
-                    console.error("Error accessing database");
-                    res.sendStatus(500);
-                } else {
-                    res.send(proyects.map((proyect) => {
-                        return proyect.cleanup();
-                    }));
-                }
-            });
+app.use(express.static(path.join(__dirname, PROYECTS_APP_DIR)));
+app.get("/", function(req, res) {
+  res.sendFile(path.join(__dirname, PROYECTS_APP_DIR, "/index.html"));
 });
 
-
-app.post(BASE_API_PATH + "/proyects", 
-    passport.authenticate('localapikey', {session:false}), 
-    (req, res) => {
-    // Create a new proyect
-    console.log(Date()+" - POST /proyects");
-    var proyect = req.body;
-    Proyect.create(proyect, (err) => {
-        if (err) {
-            console.error(err);
-            res.sendStatus(500);
-        } else {
-            res.sendStatus(201);
-        }
+app.get(
+  BASE_API_PATH + "/proyects",
+  passport.authenticate("localapikey", { session: false }),
+  (req, res) => {
+    Proyect.find((err, proyects) => {
+      if (err) {
+        console.error("Error accessing database");
+        res.sendStatus(500);
+      } else {
+        res.send(
+          proyects.map(proyect => {
+            return proyect.cleanup();
+          })
+        );
+      }
     });
-});
+  }
+);
 
-app.put(BASE_API_PATH + "/proyects", 
-    passport.authenticate('localapikey', {session:false}), 
-    (req, res) => {
-    console.log(Date()+" - PUT /proyects");
+app.post(
+  BASE_API_PATH + "/proyects",
+  passport.authenticate("localapikey", { session: false }),
+  (req, res) => {
+    // Create a new proyect
+    console.log(Date() + " - POST /proyects");
+    var proyect = req.body;
+    proyect.id =
+      new Date().toISOString().substr(0, 9) +
+      "-" +
+      Math.floor(Math.random() * (1000 - 1 + 1)) +
+      1;
+    Proyect.create(proyect, err => {
+      if (err) {
+        console.error(err);
+        res.sendStatus(500);
+      } else {
+        res.sendStatus(201);
+      }
+    });
+  }
+);
+
+app.put(
+  BASE_API_PATH + "/proyects",
+  passport.authenticate("localapikey", { session: false }),
+  (req, res) => {
+    console.log(Date() + " - PUT /proyects");
     var proyects = req.body;
-    Proyect.update(proyect, (err) => {
+    Proyect.update(proyect, err => {
       if (err) {
-          console.error(err);
-          res.sendStatus(500);
+        console.error(err);
+        res.sendStatus(500);
       } else {
-          res.sendStatus(201);
+        res.sendStatus(201);
       }
-  });
-});
+    });
+  }
+);
 
-app.delete(BASE_API_PATH + "/proyects", 
-    passport.authenticate('localapikey', {session:false}), 
-    (req, res) => {
+app.delete(
+  BASE_API_PATH + "/proyects",
+  passport.authenticate("localapikey", { session: false }),
+  (req, res) => {
     // Remove all proyects
-    console.log(Date()+" - DELETE /proyects");
-    Proyect.remove(proyect, (err) => {
+    console.log(Date() + " - DELETE /proyects");
+    Proyect.remove(proyect, err => {
       if (err) {
-          console.error(err);
-          res.sendStatus(500);
+        console.error(err);
+        res.sendStatus(500);
       } else {
-          res.sendStatus(201);
+        res.sendStatus(201);
       }
-  });
-});
+    });
+  }
+);
 
-
-app.post(BASE_API_PATH + "/proyects/:id", 
-    passport.authenticate('localapikey', {session:false}), 
-    (req, res) => {
+app.post(
+  BASE_API_PATH + "/proyects/:id",
+  passport.authenticate("localapikey", { session: false }),
+  (req, res) => {
     // Forbidden
-    console.log(Date()+" - POST /proyects");
+    console.log(Date() + " - POST /proyects");
     res.sendStatus(405);
-});
-
-
+  }
+);
 
 /*app.get(BASE_API_PATH + "/proyects/:id", (req, res) => {
     // Get a single proyect
