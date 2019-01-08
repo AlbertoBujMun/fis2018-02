@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Proyect } from '../proyect';
 import { ProyectService } from '../proyect.service';
+import { Researcher } from '../researcher';
+import { ResearcherService } from '../researcher.service';
 
 @Component({
   selector: '[app-editable-proyect]',
@@ -13,7 +15,7 @@ export class EditableProyectComponent implements OnInit {
 
   editing = false;
 
-  
+  responsibleResearcher: Researcher[];
 
   onEdit(): void {
     if (this.editing) {
@@ -24,9 +26,18 @@ export class EditableProyectComponent implements OnInit {
     }
   }
 
-  constructor(private proyectService: ProyectService) { }
+  getResponsibleResearcher(): void{
+    if(this.proyect.investigadorResponsable!=null){
+      this.researcherService.getResearcher(this.proyect.investigadorResponsable).subscribe((responsibleResearcher)=>this.responsibleResearcher=responsibleResearcher)
+    }
+  }
+
+
+
+  constructor(private proyectService: ProyectService, private researcherService: ResearcherService) { }
 
   ngOnInit() {
+    this.getResponsibleResearcher();
   }
 
 }
