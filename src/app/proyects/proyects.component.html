@@ -3,28 +3,29 @@
         {{selectedProyect.titulo}}
     </div>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formAddProject">Add Project</button>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titulo</th>
-                <th>Descripcion</th>
-                <th>Fecha Inicio</th>
-                <th>Fecha Fin</th>
-                <th>Organismo</th>
-                <th>Investigador Responsable</th>
-                <th>Investigadores</th>
-                <th>Presupuesto</th>
-                <th>Estado</th>
-                <th>&nbsp;</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let proyect of proyects" app-editable-proyect [proyect]="proyect"></tr>
-        </tbody>
-
-
-    </table>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titulo</th>
+                    <th>Descripcion</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Organismo</th>
+                    <th>Investigador Responsable</th>
+                    <th>Investigadores</th>
+                    <th>Presupuesto</th>
+                    <th>Estado</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let proyect of proyects" app-editable-proyect [proyect]="proyect"></tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <div class="modal fade" id="formAddProject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

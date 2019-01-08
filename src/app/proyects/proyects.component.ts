@@ -52,9 +52,10 @@ export class ProyectsComponent implements OnInit {
         presupuesto:null,
         estado:null,
       };
-  })
-  
+    });
   }
+
+  
 
   onEdit(proyect: Proyect): void {
     this.selectedProyect = proyect;

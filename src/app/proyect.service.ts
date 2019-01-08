@@ -71,5 +71,14 @@ private handleError<T> (operation = 'operation', result?: T) {
       );    
   }
 
+  deleteProyect(proyect: Proyect): Observable<Proyect[]> {
+    const url = `${this.proyectsUrl}/proyects/${proyect.id}$?apikey=${this.apikey}`;
+    return this.http.delete<Proyect[]>(url)
+      .pipe(
+          tap(() => this.log('Fetched Project')),
+          catchError(this.handleError('deleteProyec', []))
+      );
+  }
+
 
 }
