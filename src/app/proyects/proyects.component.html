@@ -1,38 +1,82 @@
 <div *ngIf="selectedProyect">
-  {{selectedProyect.titulo}}
+    {{selectedProyect.titulo}}
 </div>
-
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formAddProject">Add Project</button>
 <table class="table">
-<thead>
-    <tr>
-        <th>Id</th>
-        <th>Titulo</th>
-        <th>Descripcion</th>
-        <th>Fecha Inicio</th>
-        <th>Fecha Fin</th>
-        <th>Organismo</th>
-        <th>Investigador Responsable</th>
-        <th>Investigadores</th>
-        <th>Presupuesto</th>
-        <th>Estado</th>
-        <th>&nbsp;</th>
-    </tr>
-</thead>  
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Titulo</th>
+            <th>Descripcion</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Organismo</th>
+            <th>Investigador Responsable</th>
+            <th>Investigadores</th>
+            <th>Presupuesto</th>
+            <th>Estado</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let proyect of proyects" app-editable-proyect [proyect]="proyect"></tr>
+    </tbody>
 
-<tr>
-    <td></td>
-    <td><input class="form-control" [(ngModel)]="newProyect.titulo"></td>
-    <td><input class="form-control" [(ngModel)]="newProyect.descripcion"></td>
-    <td><input class="form-control" [(ngModel)]="newProyect.fechaInicio"></td>
-    <td><input class="form-control" [(ngModel)]="newProyect.fechaFin"></td>
-    <td><input class="form-control" [(ngModel)]="newProyect.organismo"></td>
-    <td><input class="form-control" [(ngModel)]="newProyect.investigadorResponsable"></td>
-    <td><input class="form-control" [(ngModel)]="newProyect.investigadores"></td>
-    <td><input class="form-control" [(ngModel)]="newProyect.presupuesto"></td>
-    <td><input class="form-control" [(ngModel)]="newProyect.estado"></td>
-    <td><button class="btn btn-primary" (click)="addProyect()">Add Project</button> </td>
-</tr>     
-<tr *ngFor="let proyect of proyects" app-editable-proyect [proyect]="proyect">
-</tr>
 
 </table>
+
+<div class="modal fade" id="formAddProject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="firstName">Título</label>
+                    <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.titulo">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">Descripción</label>
+                    <input type="text" required class="form-control" [(ngModel)]="newProyect.descripcion">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">Fecha inicio</label>
+                    <input type="text" required class="form-control" [(ngModel)]="newProyect.fechaInicio">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">Fecha fin</label>
+                    <input type="text" required class="form-control" [(ngModel)]="newProyect.fechaInicio">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">Organismo</label>
+                    <input type="text" required class="form-control" [(ngModel)]="newProyect.organismo">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">Investigador Responsable</label>
+                    <input type="text" required class="form-control" [(ngModel)]="newProyect.investigadorResponsable">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">Investigadores</label>
+                    <input type="text" required class="form-control" [(ngModel)]="newProyect.investigadores">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">Presupuesto</label>
+                    <input type="text" required class="form-control" [(ngModel)]="newProyect.presupuesto">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">Estado</label>
+                    <input type="text" required class="form-control" [(ngModel)]="newProyect.estado">
+                </div>
+                <button class="btn btn-primary" (click)="addProyect()">Save Project</button> </td>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
