@@ -139,4 +139,31 @@ describe("Proyects API", () => {
         });
     });
   });
+
+  describe("PUT /proyect/:id", () => {
+    it("should return error different id", done => {
+      var proyect = {
+        id: "1",
+        titulo: "Testeo2",
+        descripcion: "Testeroni",
+        fechaInicio: "2018-12-11T23:00:00.000Z",
+        fechaFin: "2018-12-12T23:00:00.000Z",
+        organismo: "ETSII",
+        investigadorResponsable: "1",
+        investigadores: ["2, 3"],
+        presupuesto: "1",
+        estado: "Concedido"
+      };
+
+      chai
+        .request(server.app)
+        .put("/api/v1/proyects/2")
+        .query({ apikey: "test" })
+        .send(proyect)
+        .end((err, res) => {
+          expect(res).to.have.status(409);
+          done();
+        });
+    });
+  });
 });
