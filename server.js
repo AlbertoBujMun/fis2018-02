@@ -154,34 +154,14 @@ app.delete(BASE_API_PATH + "/proyects/:id", (req, res) => {
     var id = req.params.id;
     console.log(Date() + " - DELETE /proyects/" + id);
 
-    Proyect.remove({ "id": id }, {}, (err, numRemoved) => {
+    Proyect.deleteMany({ "id": id }, (err, removeResult) => {
         if (err) {
             console.error("Error accesing DB");
             res.sendStatus(500);
         } else {
-            if (numRemoved > 1) {
+            if (removeResult.n > 1) {
                 console.warn("Incosistent DB: duplicated id");
-            } else if (numRemoved == 0) {
-                res.sendStatus(404);
-            } else {
-                res.sendStatus(200);
-            }
-        }
-    });
-});
-app.delete(BASE_API_PATH + "/proyects/:id", (req, res) => {
-    // Delete a single proyect
-    var id = req.params.id;
-    console.log(Date() + " - DELETE /proyects/" + id);
-
-    Proyect.remove({ "id": id }, {}, (err, numRemoved) => {
-        if (err) {
-            console.error("Error accesing DB");
-            res.sendStatus(500);
-        } else {
-            if (numRemoved > 1) {
-                console.warn("Incosistent DB: duplicated id");
-            } else if (numRemoved == 0) {
+            } else if (removeResult.n == 0) {
                 res.sendStatus(404);
             } else {
                 res.sendStatus(200);
@@ -190,32 +170,33 @@ app.delete(BASE_API_PATH + "/proyects/:id", (req, res) => {
     });
 });
 
-app.put(BASE_API_PATH + "/proyects/:id", (req, res) => {
+app.put(BASE_API_PATH + "/proyect/:id", (req, res) => {
     // Update proyect
     var id = req.params.id;
     var updatedProyect = req.body;
-    console.log(Date() + " - PUT /proyects/" + id);
+    console.log(Date() + " - PUT /proyect/" + id);
 
     if (id != updatedProyect.id) {
         res.sendStatus(409);
         return;
     }
 
-    Proyect.update({ "id": id }, updatedProyect, (err, numUpdated) => {
-        if (err) {
-            console.error("Error accesing DB");
-            res.sendStatus(500);
-        } else {
-            if (numUpdated > 1) {
-                console.warn("Incosistent DB: duplicated id");
-            } else if (numUpdated == 0) {
-                res.sendStatus(404);
+    Proyect.replaceOne({ "id": id },
+        updatedProyect,
+        (err, updateResult) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
             } else {
-                res.sendStatus(200);
+                if (updateResult.n > 1) {
+                    console.warn("Incosistent DB: duplicated id");
+                } else if (updateResult.n == 0) {
+                    res.sendStatus(404);
+                } else {
+                    res.sendStatus(200);
+                }
             }
-        }
-    });
+        });
 });
 
 module.exports.app = app;
-//module.exports.db = db;
