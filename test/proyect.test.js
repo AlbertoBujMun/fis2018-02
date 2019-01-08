@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 var Proyect = require("../proyects");
 var expect = chai.expect;
 
-describe("Contact DB connection", () => {
+describe("Proyect DB connection", () => {
   before(done => {
     var dbUrl = process.env.DB || "mongodb://localhost/test";
 

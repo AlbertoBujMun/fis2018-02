@@ -97,10 +97,7 @@ describe("Proyects API", () => {
         estado: "Concedido"
       };
       var dbMock = sinon.mock(Proyect);
-      dbMock
-        .expects("create")
-        .withArgs(proyect)
-        .yields(null);
+      dbMock.expects("create").yields(null);
 
       chai
         .request(server.app)
@@ -116,7 +113,7 @@ describe("Proyects API", () => {
   });
 
   describe("POST /proyects", () => {
-    it("should return 500 if fails", done => {
+    it("should return 401 if there's no apikey", done => {
       var proyect = {
         id: "1",
         titulo: "Testeo",
@@ -130,17 +127,13 @@ describe("Proyects API", () => {
         estado: "Concedido"
       };
       var dbMock = sinon.mock(Proyect);
-      dbMock
-        .expects("create")
-        .withArgs(proyect)
-        .yields(true);
 
       chai
         .request(server.app)
         .post("/api/v1/proyects")
         .send(proyect)
         .end((err, res) => {
-          expect(res).to.have.status(500);
+          expect(res).to.have.status(401);
           dbMock.verify();
           done();
         });
