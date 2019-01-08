@@ -16,6 +16,7 @@ export class EditableProyectComponent implements OnInit {
   editing = false;
 
   responsibleResearcher: Researcher[];
+  
 
   onEdit(): void {
     if (this.editing) {

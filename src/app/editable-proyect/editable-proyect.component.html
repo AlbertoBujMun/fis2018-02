@@ -33,49 +33,29 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div *ngIf="responsibleResearcher != null">
-                    <label for="firstName">Responsible Researcher</label>
-                    <p>{{responsibleResearcher}}</p>
+                <div>
+                    <label for="firstName">Responsible Researcher:</label>
+                    <p *ngFor="let researcher of responsibleResearcher">{{researcher.dni}}</p>
                 </div>
                 <div>
-                    <label for="firstName">Researchers</label>
+                    <label for="firstName">Researchers:</label>
                 </div>
                 <div>
-                    <label for="firstName">Organisation</label>
+                    <label for="firstName">Organisation:</label>
                     <p>{{proyect.organismo}}</p>
                 </div>
                 <div id="map" style="width: 100px; height: 100px;"></div>
                 <script>
-                    var map;
-
-                    var geocoder;
-                    function initialize() {
-                        geocoder = new google.maps.Geocoder();
-                        var latlng = new google.maps.LatLng(-34.397, 150.644);
-                        var mapOptions = {
-                            zoom: 8,
-                            center: latlng
-                        }
-                        map = new google.maps.Map(document.getElementById('map'), mapOptions);
-                    }
-
-                    function codeAddress() {
-                        var address = 'ETSII'
-                        geocoder.geocode({ 'address': address }, function (results, status) {
-                            if (status == 'OK') {
-                                map.setCenter(results[0].geometry.location);
-                                var marker = new google.maps.Marker({
-                                    map: map,
-                                    position: results[0].geometry.location
-                                });
-                            } else {
-                                alert('Geocode was not successful for the following reason: ' + status);
-                            }
-                        });
-                    }
-                    initialize();
-                    codeAddress();
+                  var map;
+                  function initMap() {
+                    map = new google.maps.Map(document.getElementById('map'), {
+                      center: {lat: -34.397, lng: 150.644},
+                      zoom: 8
+                    });
+                  }
                 </script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBagbuGDTjVXpLFMx0vUNGpUPJMucr-QPE&callback=initMap"
+                async defer></script>
 
             </div>
             <div class="modal-footer">
