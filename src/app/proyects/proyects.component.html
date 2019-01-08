@@ -73,11 +73,10 @@
                     <label for="firstName">Estado</label>
                     <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.estado">
                 </div>
-                <button class="btn btn-primary" (click)="addProyect()">Save Project</button>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary" (click)="addProyect()">Save changes</button>
             </div>
         </div>
     </div>
