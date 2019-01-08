@@ -52,8 +52,13 @@ export class ProyectsComponent implements OnInit {
         presupuesto:null,
         estado:null,
       };
-  })
-  
+    });
+  }
+
+  deleteProyect():void{
+    this.proyectService.deleteProyect(this.newProyect).subscribe(()=>{
+      location.reload();
+    });
   }
 
   onEdit(proyect: Proyect): void {
