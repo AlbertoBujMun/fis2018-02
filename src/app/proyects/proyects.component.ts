@@ -55,11 +55,7 @@ export class ProyectsComponent implements OnInit {
     });
   }
 
-  deleteProyect():void{
-    this.proyectService.deleteProyect(this.newProyect).subscribe(()=>{
-      location.reload();
-    });
-  }
+  
 
   onEdit(proyect: Proyect): void {
     this.selectedProyect = proyect;

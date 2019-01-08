@@ -24,6 +24,12 @@ export class EditableProyectComponent implements OnInit {
     }
   }
 
+  deleteProyect(): void {
+      this.proyectService.deleteProyect(this.proyect).subscribe(()=>{
+      location.reload();
+    });
+  }
+
   constructor(private proyectService: ProyectService) { }
 
   ngOnInit() {
