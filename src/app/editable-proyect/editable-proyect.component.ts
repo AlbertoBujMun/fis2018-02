@@ -13,6 +13,8 @@ export class EditableProyectComponent implements OnInit {
 
   editing = false;
 
+  
+
   onEdit(): void {
     if (this.editing) {
       this.proyectService.updateProyect(this.proyect)

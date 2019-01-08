@@ -64,8 +64,7 @@ app.post(
     console.log(Date() + " - POST /proyects");
     var proyect = req.body;
     proyect.id =
-      new Date().toISOString().substr(0, 9) +
-      "-" +
+      new Date().toISOString().substr(0, 9).replace("-","") +
       Math.floor(Math.random() * (1000 - 1 + 1)) +
       1;
     Proyect.create(proyect, err => {
@@ -102,14 +101,7 @@ app.delete(
   (req, res) => {
     // Remove all proyects
     console.log(Date() + " - DELETE /proyects");
-    Proyect.remove(proyect, err => {
-      if (err) {
-        console.error(err);
-        res.sendStatus(500);
-      } else {
-        res.sendStatus(201);
-      }
-    });
+    res.sendStatus(403)
   }
 );
 
@@ -135,7 +127,7 @@ app.get(
   }
 );
 
-/*app.get(BASE_API_PATH + "/proyects/:id", (req, res) => {
+app.get(BASE_API_PATH + "/proyects/:id", (req, res) => {
     // Get a single proyect
     var id = req.params.id;
     console.log(Date()+" - GET /proyects/"+id);
@@ -223,7 +215,7 @@ app.put(BASE_API_PATH + "/proyects/:id", (req, res) => {
             }
         }
     });
-});*/
+});
 
 module.exports.app = app;
 //module.exports.db = db;
