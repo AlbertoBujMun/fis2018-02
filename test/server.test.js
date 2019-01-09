@@ -14,16 +14,6 @@ describe("Proyects API", () => {
     ApiKeyStub.yields(null, new ApiKey({ user: "test" }));
   });
 
-  it("hola mundo de prueba", done => {
-    var x = 3;
-    var y = 5;
-
-    var resultado = x + y;
-
-    expect(resultado).to.equal(8);
-    done();
-  });
-
   describe("GET /", () => {
     it("should return HTML", done => {
       chai
@@ -106,6 +96,7 @@ describe("Proyects API", () => {
         .send(proyect)
         .end((err, res) => {
           expect(res).to.have.status(201);
+          expect(res).to.be.text;
           dbMock.verify();
           done();
         });
@@ -126,7 +117,6 @@ describe("Proyects API", () => {
         presupuesto: "1",
         estado: "Concedido"
       };
-      var dbMock = sinon.mock(Proyect);
 
       chai
         .request(server.app)
@@ -134,7 +124,6 @@ describe("Proyects API", () => {
         .send(proyect)
         .end((err, res) => {
           expect(res).to.have.status(401);
-          dbMock.verify();
           done();
         });
     });
@@ -162,6 +151,33 @@ describe("Proyects API", () => {
         .send(proyect)
         .end((err, res) => {
           expect(res).to.have.status(409);
+          done();
+        });
+    });
+  });
+
+  describe("DELETE /proyects/:id", () => {
+    it("should return 404 not found proyect", done => {
+      var proyect = {
+        id: "35",
+        titulo: "Testeo2",
+        descripcion: "Testeroni",
+        fechaInicio: "2018-12-11T23:00:00.000Z",
+        fechaFin: "2018-12-12T23:00:00.000Z",
+        organismo: "ETSII",
+        investigadorResponsable: "1",
+        investigadores: ["2, 3"],
+        presupuesto: "1",
+        estado: "Concedido"
+      };
+
+      chai
+        .request(server.app)
+        .delete("/api/v1/proyects/35")
+        .query({ apikey: "test" })
+        .send(proyect)
+        .end((err, res) => {
+          expect(res).to.have.status(404);
           done();
         });
     });
