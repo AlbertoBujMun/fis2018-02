@@ -81,18 +81,10 @@ app.put(
     BASE_API_PATH + "/proyects",
     passport.authenticate("localapikey", { session: false }),
     (req, res) => {
+        // Forbidden
         console.log(Date() + " - PUT /proyects");
-        var proyects = req.body;
-        Proyect.update(proyect, err => {
-            if (err) {
-                console.error(err);
-                res.sendStatus(500);
-            } else {
-                res.sendStatus(201);
-            }
-        });
-    }
-);
+        res.sendStatus(405);
+    });
 
 app.delete(
     BASE_API_PATH + "/proyects",
@@ -173,7 +165,7 @@ app.delete(BASE_API_PATH + "/proyects/:id",
         });
     });
 
-app.put(BASE_API_PATH + "/proyect/:id",
+app.put(BASE_API_PATH + "/proyects/:id",
     passport.authenticate("localapikey", { session: false }),
     (req, res) => {
         // Update proyect
@@ -184,8 +176,7 @@ app.put(BASE_API_PATH + "/proyect/:id",
             res.sendStatus(409);
             return;
         }
-
-        Proyect.updateOne({ "id": id },
+        Proyect.replaceOne({ "id": id },
             updatedProyect,
             (err, updateResult) => {
                 if (err) {

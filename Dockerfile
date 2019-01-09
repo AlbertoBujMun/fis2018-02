@@ -11,8 +11,8 @@ COPY index.js .
 COPY server.js .
 COPY apikeys.js .
 COPY proyects.js .
-COPY server.test.js .
-COPY proyect.test.js .
+#COPY server.test.js .
+#COPY proyect.test.js .
 COPY dist dist
 
 #RUN ng build --prod
