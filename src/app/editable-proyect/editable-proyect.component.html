@@ -12,8 +12,8 @@
 <td *ngIf="editing">></td>
 <td *ngIf="editing"><input class="form-control" [(ngModel)]="proyect.titulo" /></td>
 <td *ngIf="editing"><input class="form-control" [(ngModel)]="proyect.descripcion" /></td>
-<td *ngIf="editing"><input class="form-control" [(ngModel)]="proyect.fechaInicio" /></td>
-<td *ngIf="editing"><input class="form-control" [(ngModel)]="proyect.fechaFin" /></td>
+<td *ngIf="editing"><input type="date" class="form-control" [(ngModel)]="proyect.fechaInicio" /></td>
+<td *ngIf="editing"><input type="date" class="form-control" [(ngModel)]="proyect.fechaFin" /></td>
 <td *ngIf="editing"><input class="form-control" [(ngModel)]="proyect.organismo" /></td>
 <td *ngIf="editing"><select [(ngModel)]="proyect.investigadorResponsable" required class="form-control">
         <option *ngFor="let researcherf of allResearchers" [value]="researcherf.dni">{{researcherf.surname}},
