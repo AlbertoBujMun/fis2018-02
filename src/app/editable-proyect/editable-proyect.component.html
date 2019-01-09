@@ -19,15 +19,15 @@
 <td *ngIf="editing"><input class="form-control" [(ngModel)]="proyect.investigadores" /></td>
 <td *ngIf="editing"><input class="form-control" [(ngModel)]="proyect.presupuesto" /></td>
 <td *ngIf="editing"><input class="form-control" [(ngModel)]="proyect.estado" /></td>
-<td><button type="button" class="btn btn-primary" (click)="onEdit()">{{editing ? 'Save' : 'Edit'}}</button></td>
-<td><button type="button" class="btn btn-danger" (click)="deleteProyect()">Remove</button></td>
-<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#displayProyect">Display</button></td>
+<td><button type="button" class="btn btn-primary" (click)="onEdit()">{{editing ? 'Guardar' : 'Editar'}}</button></td>
+<td><button type="button" class="btn btn-danger" (click)="deleteProyect()">Borrar</button></td>
+<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#displayProyect">Mostrar</button></td>
 
 <div class="modal fade" id="displayProyect" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Investigadores</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -46,16 +46,19 @@
                 </div>
                 <div id="map" style="width: 100px; height: 100px;"></div>
                 <script>
-                  var map;
-                  function initMap() {
-                    map = new google.maps.Map(document.getElementById('map'), {
-                      center: {lat: -34.397, lng: 150.644},
-                      zoom: 8
-                    });
-                  }
+                    var map;
+
+                    function initMap() {
+                        map = new google.maps.Map(document.getElementById('map'), {
+                            center: {
+                                lat: -34.397,
+                                lng: 150.644
+                            },
+                            zoom: 8
+                        });
+                    }
                 </script>
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBagbuGDTjVXpLFMx0vUNGpUPJMucr-QPE&callback=initMap"
-                async defer></script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBagbuGDTjVXpLFMx0vUNGpUPJMucr-QPE&callback=initMap" async defer></script>
 
             </div>
             <div class="modal-footer">
@@ -64,4 +67,3 @@
         </div>
     </div>
 </div>
-
