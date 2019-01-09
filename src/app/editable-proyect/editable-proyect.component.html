@@ -15,15 +15,22 @@
 <td *ngIf="editing"><input class="form-control" [(ngModel)]="proyect.fechaInicio" /></td>
 <td *ngIf="editing"><input class="form-control" [(ngModel)]="proyect.fechaFin" /></td>
 <td *ngIf="editing"><input class="form-control" [(ngModel)]="proyect.organismo" /></td>
-<td *ngIf="editing"><input class="form-control" [(ngModel)]="proyect.investigadorResponsable" /></td>
-<td *ngIf="editing"><input class="form-control" [(ngModel)]="proyect.investigadores" /></td>
+<td *ngIf="editing"><select [(ngModel)]="proyect.investigadorResponsable" required class="form-control">
+        <option *ngFor="let researcherf of allResearchers" [value]="researcherf.dni">{{researcherf.surname}},
+            {{researcherf.name}}</option>
+    </select></td>
+<td *ngIf="editing"><select multiple [(ngModel)]="proyect.investigadores" required class="form-control">
+        <option *ngFor="let researcherf of allResearchers" [value]="researcherf.dni">{{researcherf.surname}},
+            {{researcherf.name}}</option>
+    </select>
+</td>
 <td *ngIf="editing"><input class="form-control" [(ngModel)]="proyect.presupuesto" /></td>
 <td *ngIf="editing">
     <select class="form-control" name="multipleSelect" id="multipleSelect" [(ngModel)]="proyect.estado">
-            <option value="option-1">Solicitado</option>
-            <option value="option-2">Concedido</option>
-            <option value="option-3">Rechazado</option>
-          </select>
+        <option value="option-1">Solicitado</option>
+        <option value="option-2">Concedido</option>
+        <option value="option-3">Rechazado</option>
+    </select>
 </td>
 <td><button type="button" class="btn btn-primary" (click)="onEdit()">{{editing ? 'Guardar' : 'Editar'}}</button></td>
 <td><button type="button" class="btn btn-danger" (click)="deleteProyect()">Borrar</button></td>
@@ -71,4 +78,3 @@
     </div>
 </div>
 -->
-
