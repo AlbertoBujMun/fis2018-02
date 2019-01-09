@@ -18,7 +18,13 @@
 <td *ngIf="editing"><input class="form-control" [(ngModel)]="proyect.investigadorResponsable" /></td>
 <td *ngIf="editing"><input class="form-control" [(ngModel)]="proyect.investigadores" /></td>
 <td *ngIf="editing"><input class="form-control" [(ngModel)]="proyect.presupuesto" /></td>
-<td *ngIf="editing"><input class="form-control" [(ngModel)]="proyect.estado" /></td>
+<td *ngIf="editing">
+    <select class="form-control" name="multipleSelect" id="multipleSelect" [(ngModel)]="proyect.estado">
+            <option value="option-1">Solicitado</option>
+            <option value="option-2">Concedido</option>
+            <option value="option-3">Rechazado</option>
+          </select>
+</td>
 <td><button type="button" class="btn btn-primary" (click)="onEdit()">{{editing ? 'Guardar' : 'Editar'}}</button></td>
 <td><button type="button" class="btn btn-danger" (click)="deleteProyect()">Borrar</button></td>
 <!--<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#displayProyect">Mostrar</button></td>-->

@@ -72,7 +72,12 @@
                 </div>
                 <div class="form-group">
                     <label for="estado">Estado</label>
-                    <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.estado">
+                    <select class="form-control" name="multipleSelect" id="multipleSelect" [(ngModel)]="newProyect.estado">
+                            <option value="option-1">Solicitado</option>
+                            <option value="option-2">Concedido</option>
+                            <option value="option-3">Rechazado</option>
+                          </select>
+                    <!--<input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.estado">-->
                 </div>
             </div>
             <div class="modal-footer">
