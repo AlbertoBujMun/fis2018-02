@@ -167,22 +167,34 @@ describe("Proyects API", () => {
         });
     });
 
-    describe('DELETE /proyects/:id', () => {
-        after(function() {
-            Project.remove.restore();
-        });
-        it('should return 200 and delete every proyect ', (done) => {
-            var ProjectStub = sinon.stub(Project, 'remove');
-            ProjectStub.yields(null, null);
+    /* describe('DELETE /proyects/:id', () => {
+         var proyect = {
+             id: "1",
+             titulo: "Testeo2",
+             descripcion: "Testeroni",
+             fechaInicio: "2018-12-11T23:00:00.000Z",
+             fechaFin: "2018-12-12T23:00:00.000Z",
+             organismo: "ETSII",
+             investigadorResponsable: "1",
+             investigadores: ["2, 3"],
+             presupuesto: "1",
+             estado: "Concedido"
+         };
+         after(function() {
+             proyect.remove.restore();
+         });
+         it('should return 200 and delete every proyect ', (done) => {
+             var ProjectStub = sinon.stub(Project, 'remove');
+             ProjectStub.yields(null, null);
 
-            chai.request(server.app)
-                .delete('/api/v1/proyects/0')
-                .query({ apikey: "test" })
-                .send({})
-                .end((err, res) => {
-                    expect(res).to.have.status(200);
-                    done();
-                });
-        });
-    });
+             chai.request(server.app)
+                 .delete('/api/v1/proyects/0')
+                 .query({ apikey: "test" })
+                 .send({})
+                 .end((err, res) => {
+                     expect(res).to.have.status(200);
+                     done();
+                 });
+         });
+     });*/
 });
