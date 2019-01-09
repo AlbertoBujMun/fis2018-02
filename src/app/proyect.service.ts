@@ -62,7 +62,6 @@ private handleError<T> (operation = 'operation', result?: T) {
 
   updateProyect(proyect: Proyect): Observable<any> {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    
     const url = `${this.proyectsUrl}/proyects/${proyect.id}?apikey=${this.apikey}`;
     return this.http.put(url, proyect, {responseType: 'text', headers: headers})
         .pipe(
@@ -72,13 +71,11 @@ private handleError<T> (operation = 'operation', result?: T) {
   }
 
   deleteProyect(proyect: Proyect): Observable<Proyect[]> {
-    const url = `${this.proyectsUrl}/proyects/${proyect.id}$?apikey=${this.apikey}`;
+    const url = `${this.proyectsUrl}/proyects/${proyect.id}?apikey=${this.apikey}`;
     return this.http.delete<Proyect[]>(url)
       .pipe(
           tap(() => this.log('Fetched Project')),
           catchError(this.handleError('deleteProyec', []))
       );
   }
-
-
 }

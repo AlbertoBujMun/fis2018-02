@@ -1,6 +1,5 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var DataStore = require("nedb");
 var cors = require("cors");
 var path = require("path");
 var Proyect = require("./proyects");
@@ -127,26 +126,28 @@ app.delete(
     }
 );*/
 
-app.get(BASE_API_PATH + "/proyects/:id", (req, res) => {
-    // Get a single proyect
-    var id = req.params.id;
-    console.log(Date() + " - GET /proyects/" + id);
-
-    Proyect.find({ "id": id }, (err, proyects) => {
-        if (err) {
-            console.error("Error accesing DB");
-            res.sendStatus(500);
-        } else {
-            if (proyects.length > 1) {
-                console.warn("Incosistent DB: duplicated id");
+app.get(
+    BASE_API_PATH + "/proyects/:id",
+    passport.authenticate("localapikey", { session: false }),
+    (req, res) => {
+        // Get a single proyect
+        var id = req.params.id;
+        console.log(Date() + " - GET /proyects/" + id);
+        Proyect.find({ "id": id }, (err, proyects) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.sendStatus(500);
+            } else {
+                if (proyects.length > 1) {
+                    console.warn("Incosistent DB: duplicated id");
+                }
+                res.send(proyects.map((proyect) => {
+                    delete proyect._id;
+                    return proyect;
+                })[0]);
             }
-            res.send(proyects.map((proyect) => {
-                delete proyect._id;
-                return proyect;
-            })[0]);
-        }
+        });
     });
-});
 
 
 app.delete(BASE_API_PATH + "/proyects/:id",
@@ -179,13 +180,12 @@ app.put(BASE_API_PATH + "/proyect/:id",
         var id = req.params.id;
         var updatedProyect = req.body;
         console.log(Date() + " - PUT /proyect/" + id);
-
         if (id != updatedProyect.id) {
             res.sendStatus(409);
             return;
         }
 
-        Proyect.replaceOne({ "id": id },
+        Proyect.updateOne({ "id": id },
             updatedProyect,
             (err, updateResult) => {
                 if (err) {
