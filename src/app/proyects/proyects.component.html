@@ -2,7 +2,7 @@
     <div *ngIf="selectedProyect">
         {{selectedProyect.titulo}}
     </div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formAddProject">Add Project</button>
+    <button type="button" class="au-btn--blue" data-toggle="modal" data-target="#formAddProject">Add Project</button>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -17,6 +17,7 @@
                     <th>Investigadores</th>
                     <th>Presupuesto</th>
                     <th>Estado</th>
+                    <th>&nbsp;</th>
                     <th>&nbsp;</th>
                     <th>&nbsp;</th>
                 </tr>
@@ -39,48 +40,45 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="title">Título</label>
+                    <label for="titulo">Título</label>
                     <input type="text" class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.titulo">
                 </div>
                 <div class="form-group">
-                    <label for="description">Descripción</label>
+                    <label for="descripcion">Descripción</label>
                     <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.descripcion">
                 </div>
                 <div class="form-group">
-                    <label for="dateIni">Fecha inicio</label>
-                    <ng-datepicker></ng-datepicker>
+                    <label for="fechaIni">Fecha inicio</label>
                     <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.fechaInicio">
                 </div>
                 <div class="form-group">
-                    <label for="dateFin">Fecha fin</label>
+                    <label for="fechaFin">Fecha fin</label>
                     <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.fechaInicio">
                 </div>
                 <div class="form-group">
-                    <label for="firstName">Organismo</label>
+                    <label for="organismo">Organismo</label>
                     <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.organismo">
                 </div>
                 <div class="form-group">
-                    <label for="researcher">Investigador Responsable</label>
-                    <select class="form-control ng-pristine ng-touched" name="" id="">
-                            <option *ngFor="let researcher of getAllResearchers()">researcher</option>
-                           </select> <input type="text" required [(ngModel)]="newProyect.investigadorResponsable">
+                    <label for="investigadorRes">Investigador Responsable</label>
+                    <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.investigadorResponsable">
                 </div>
                 <div class="form-group">
-                    <label for="researchers">Investigadores</label>
+                    <label for="investigadores">Investigadores</label>
                     <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.investigadores">
                 </div>
                 <div class="form-group">
-                    <label for="firstName">Presupuesto</label>
+                    <label for="presupuesto">Presupuesto</label>
                     <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.presupuesto">
                 </div>
                 <div class="form-group">
-                    <label for="status">Estado</label>
+                    <label for="estado">Estado</label>
                     <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.estado">
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" (click)="addProyect()">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" (click)="addProyect()">Guardar</button>
             </div>
         </div>
     </div>

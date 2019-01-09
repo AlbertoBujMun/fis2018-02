@@ -7,6 +7,30 @@ header {
     -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
     -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
-    height: 90px;
     margin-bottom: 2em;
+}
+
+.table-earning thead th {
+    background: #0082c3;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table {
+    margin-top: 1em;
+}
+
+.au-btn--blue {
+    background: #ffffff;
+    color: #0082c3;
+    border: 2px solid #0082c3;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.au-btn--blue:hover {
+    background: #0082c3;
+    color: #ffffff;
+    border: 2px solid #0082c3;
 }
