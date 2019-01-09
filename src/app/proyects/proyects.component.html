@@ -38,42 +38,7 @@
           </button>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label for="firstName">Título</label>
-                    <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.titulo">
-                </div>
-                <div class="form-group">
-                    <label for="firstName">Descripción</label>
-                    <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.descripcion">
-                </div>
-                <div class="form-group">
-                    <label for="firstName">Fecha inicio</label>
-                    <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.fechaInicio">
-                </div>
-                <div class="form-group">
-                    <label for="firstName">Fecha fin</label>
-                    <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.fechaInicio">
-                </div>
-                <div class="form-group">
-                    <label for="firstName">Organismo</label>
-                    <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.organismo">
-                </div>
-                <div class="form-group">
-                    <label for="firstName">Investigador Responsable</label>
-                    <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.investigadorResponsable">
-                </div>
-                <div class="form-group">
-                    <label for="firstName">Investigadores</label>
-                    <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.investigadores">
-                </div>
-                <div class="form-group">
-                    <label for="firstName">Presupuesto</label>
-                    <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.presupuesto">
-                </div>
-                <div class="form-group">
-                    <label for="firstName">Estado</label>
-                    <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.estado">
-                </div>
+                <app-form-project></app-form-project>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

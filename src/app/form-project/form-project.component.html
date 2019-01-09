@@ -1,0 +1,43 @@
+<form [formGroup]="myForm" (ngSubmit)="saveData()" novalidate>
+    <div class="form-group">
+        <label for="title">Título</label>
+        <input formControlName="titulo" type="text" class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.titulo">
+        <div *ngIf="myForm.get('titulo').errors && myForm.get('titulo').dirty">
+            <p *ngIf="myForm.get('titulo').has-error('required')">Campo requerido</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="description">Descripción</label>
+        <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.descripcion">
+    </div>
+    <div class="form-group">
+        <label for="dateIni">Fecha inicio</label>
+        <ng-datepicker></ng-datepicker>
+        <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.fechaInicio">
+    </div>
+    <div class="form-group">
+        <label for="dateFin">Fecha fin</label>
+        <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.fechaInicio">
+    </div>
+    <div class="form-group">
+        <label for="firstName">Organismo</label>
+        <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.organismo">
+    </div>
+    <div class="form-group">
+        <label for="researcher">Investigador Responsable</label>
+        <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.investigadorResponsable">
+    </div>
+    <div class="form-group">
+        <label for="researchers">Investigadores</label>
+        <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.investigadores">
+    </div>
+    <div class="form-group">
+        <label for="firstName">Presupuesto</label>
+        <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.presupuesto">
+    </div>
+    <div class="form-group">
+        <label for="status">Estado</label>
+        <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.estado">
+    </div>
+
+</form>

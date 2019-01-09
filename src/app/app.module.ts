@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { ProyectsComponent } from './proyects/proyects.component';
 import { EditableProyectComponent } from './editable-proyect/editable-proyect.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormProjectComponent } from './form-project/form-project.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProyectsComponent,
-    EditableProyectComponent
+    EditableProyectComponent,
+    FormProjectComponent
   ],
   imports: [
     BrowserModule,
