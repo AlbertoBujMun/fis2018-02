@@ -6,7 +6,7 @@
     "start": "node index.js",
     "inspect": "node --nolazy --inspect-brk=5858 index.js",
     "build": "ng build",
-    "test": "ng test",
+    "test": "mocha --timeout 10000",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

@@ -48,7 +48,7 @@ private handleError<T> (operation = 'operation', result?: T) {
       );
   }
 
-  getResearcher(dni): Observable<Researcher[]> {
+  getResearcher(dni : String): Observable<Researcher[]> {
     const url = `${this.researchersUrl}/researchers/${dni}?apikey=${this.apikey}`;
     return this.http.get<Researcher[]>(url)
       .pipe(
