@@ -81,18 +81,10 @@ app.put(
     BASE_API_PATH + "/proyects",
     passport.authenticate("localapikey", { session: false }),
     (req, res) => {
+        // Forbidden
         console.log(Date() + " - PUT /proyects");
-        var proyects = req.body;
-        Proyect.update(proyect, err => {
-            if (err) {
-                console.error(err);
-                res.sendStatus(500);
-            } else {
-                res.sendStatus(201);
-            }
-        });
-    }
-);
+        res.sendStatus(405);
+    });
 
 app.delete(
     BASE_API_PATH + "/proyects",
@@ -180,12 +172,12 @@ app.put(BASE_API_PATH + "/proyect/:id",
         var id = req.params.id;
         var updatedProyect = req.body;
         console.log(Date() + " - PUT /proyect/" + id);
+        console.log(updatedProyect);
         if (id != updatedProyect.id) {
             res.sendStatus(409);
             return;
         }
-
-        Proyect.updateOne({ "id": id },
+        Proyect.replaceOne({ "id": id },
             updatedProyect,
             (err, updateResult) => {
                 if (err) {
@@ -195,6 +187,7 @@ app.put(BASE_API_PATH + "/proyect/:id",
                     if (updateResult.n > 1) {
                         console.warn("Incosistent DB: duplicated id");
                     } else if (updateResult.n == 0) {
+                        console.log(updateResult);
                         res.sendStatus(404);
                     } else {
                         res.sendStatus(200);
