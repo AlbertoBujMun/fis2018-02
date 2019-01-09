@@ -34,3 +34,12 @@ header {
     color: #ffffff;
     border: 2px solid #0082c3;
 }
+
+.modal-header {
+    background: #0082c3;
+    color: #ffffff;
+}
+
+.modal-body {
+    background: #dee2e6;
+}
