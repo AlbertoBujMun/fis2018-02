@@ -34,8 +34,8 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Añadir proyecto</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
@@ -60,11 +60,16 @@
                 </div>
                 <div class="form-group">
                     <label for="investigadorRes">Investigador Responsable</label>
-                    <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.investigadorResponsable">
+                    <select [(ngModel)]="newProyect.investigadorResponsable" required class="form-control ng-pristine ng-touched">
+                        <option *ngFor="let researcher of researchers" [value]="researcher.dni">{{researcher.surname}}, {{researcher.name}}</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="investigadores">Investigadores</label>
                     <input type="text" required class="form-control ng-pristine ng-touched" [(ngModel)]="newProyect.investigadores">
+                    <select multiple [(ngModel)]="newProyect.investigadores" required class="form-control ng-pristine ng-touched">
+                            <option *ngFor="let researcher of researchers" [value]="researcher.dni">{{researcher.surname}}, {{researcher.name}}</option>
+                        </select>
                 </div>
                 <div class="form-group">
                     <label for="presupuesto">Presupuesto</label>

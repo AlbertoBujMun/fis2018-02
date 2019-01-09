@@ -16,6 +16,11 @@ export class EditableProyectComponent implements OnInit {
   editing = false;
 
   responsibleResearcher: Researcher[];
+  allResearchers: Researcher[];
+
+  getAllResearchers(): void{
+    this.researcherService.getResearchers().subscribe((allResearchers)=>this.allResearchers=allResearchers)
+  }
   
 
   onEdit(): void {
@@ -44,7 +49,7 @@ export class EditableProyectComponent implements OnInit {
   constructor(private proyectService: ProyectService, private researcherService: ResearcherService) { }
 
   ngOnInit() {
-    this.getResponsibleResearcher();
+    this.getAllResearchers();
   }
 
 }
