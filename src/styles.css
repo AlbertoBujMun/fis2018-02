@@ -43,3 +43,7 @@ header {
 .modal-body {
     background: #dee2e6;
 }
+
+table td {
+    vertical-align: middle;
+}
