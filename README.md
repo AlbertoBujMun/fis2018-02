@@ -1,7 +1,4 @@
-#Instrucciones básicas
+##Requisitos por encima del nivel básico:
 
-Recordad al descargar hacer npm install
-
-Una vez se van a probar cambios, hacer ng build --prod para construir
-
-y npm start para arrancar
+* Integración con la API de investigadores
+* Ejemplos de Test mock y stub en server.test.js
